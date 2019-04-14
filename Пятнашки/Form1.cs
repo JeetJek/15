@@ -17,15 +17,38 @@ namespace Пятнашки
             InitializeComponent();
         }
         Button[,] field;//Объявление локального массива типа кнопка для поля 
-        int[,] nums;
+        int[,] nums;//массив чисел для облегчения проверки на валидность
         int range = 5;//промежутки между клетками
         int size = 100;//размер клеток
         Image cell = Image.FromFile("Resourses/Cells.png");
-        Image up = Image.FromFile("Resourses/arrow.png");
+        Image up = Image.FromFile("Resourses/arrowUp.png");
+
+        Button arrowUp = new Button();
+        Button arrowDown = new Button();
+        Button arrowLeft = new Button();
+        Button arrowRight = new Button();
+
         private void Form1_Load(object sender, EventArgs e)
         {
-            
-            int n=0;
+            #region Стрелки
+            arrowDown.BackgroundImage = Image.FromFile("Resourses/arrowDown.png");
+            arrowUp.BackgroundImage = Image.FromFile("Resourses/arrowUp.png");
+            arrowLeft.BackgroundImage = Image.FromFile("Resourses/arrowLeft.png");
+            arrowRight.BackgroundImage = Image.FromFile("Resourses/arrowRight.png");
+            arrowUp.Visible = false;
+            arrowDown.Visible = false;
+            arrowRight.Visible = false;
+            arrowLeft.Visible = false;
+            arrowDown.Size = new Size(size, size);
+            arrowUp.Size = new Size(size, size);
+            arrowLeft.Size = new Size(size, size);
+            arrowRight.Size = new Size(size, size);
+            Controls.Add(arrowDown);
+            Controls.Add(arrowUp);
+            Controls.Add(arrowLeft);
+            Controls.Add(arrowRight);
+            #endregion
+            int n =0;
             field = new Button[4, 4];
             nums = new int[4, 4];
             this.Location= new Point(System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width / 2-(System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width / 4), System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height / 2 - (System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height / 4));
@@ -38,7 +61,8 @@ namespace Пятнашки
                     field[i, j].Location = new Point(i * size + range, j * size + range);//задаю положение кнопки
                     field[i, j].FlatAppearance.BorderSize = 0;//толщина границы кнопки = 0
                     field[i, j].Size = new Size(size, size);//размер ячейки
-
+                    if (n == 0)
+                        field[i, j].Text = "";
                     if(n!=0)
                         field[i, j].Text =""+ n;//отображение цифер на кнопках
                     nums[i, j] = n;//массив цифер
@@ -50,19 +74,24 @@ namespace Пятнашки
                 }
             this.Size = new Size((4 * size) + 5*range, (4 * size) + 10*range);
         }
-        private void add(System.Windows.Forms.Control n)
-        {
-            Controls.Add(n);
-        }
+
         private void clickButton(object sender, EventArgs e)
         {
-
             Button tmp = sender as Button;
             int x = (tmp.Location.X - range) / size;
             int y = (tmp.Location.Y - range) / size;
-            string txt = field[x, y - 1].Text;
-            field[x, y-1].Text=field[x,y].Text;
-            field[x, y].Text = txt;
+            //Нужна проверка ячеек на существование и заполненность
+            try
+            {
+                if (field[x - 1, y].Text == "")
+                {
+                    arrowLeft.Location = new Point((x - 1) * size + range, y * size + range);
+                    arrowLeft.Visible = true;
+                    arrowLeft.BringToFront();
+                }
+            }
+            catch (Exception ex)
+            { }
 
         }
         static Image ScaleImage(Image source, int width, int height)
