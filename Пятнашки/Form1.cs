@@ -43,6 +43,11 @@ namespace Пятнашки
             arrowUp.Size = new Size(size, size);
             arrowLeft.Size = new Size(size, size);
             arrowRight.Size = new Size(size, size);
+
+            arrowDown.Click += clickDown;
+            arrowUp.Click += clickUp;
+            arrowLeft.Click += clickLeft;
+            arrowRight.Click += clickRight;
             Controls.Add(arrowDown);
             Controls.Add(arrowUp);
             Controls.Add(arrowLeft);
@@ -74,6 +79,36 @@ namespace Пятнашки
                 }
             this.Size = new Size((4 * size) + 5*range, (4 * size) + 10*range);
         }
+        private void clickDown(object sender, EventArgs e)
+        {
+            arrowDown.Visible = false;
+            arrowUp.Visible = false;
+            arrowLeft.Visible = false;
+            arrowRight.Visible = false;
+        }
+        private void clickUp(object sender, EventArgs e)
+        {
+            arrowDown.Visible = false;
+            arrowUp.Visible = false;
+            arrowLeft.Visible = false;
+            arrowRight.Visible = false;
+        }
+        private void clickLeft(object sender, EventArgs e)
+        {
+            arrowDown.Visible = false;
+            arrowUp.Visible = false;
+            arrowLeft.Visible = false;
+            arrowRight.Visible = false;
+        }
+        private void clickRight(object sender, EventArgs e)
+        {
+            arrowDown.Visible = false;
+            arrowUp.Visible = false;
+            arrowLeft.Visible = false;
+            arrowRight.Visible = false;
+        }
+
+
 
         private void clickButton(object sender, EventArgs e)
         {
@@ -88,6 +123,39 @@ namespace Пятнашки
                     arrowLeft.Location = new Point((x - 1) * size + range, y * size + range);
                     arrowLeft.Visible = true;
                     arrowLeft.BringToFront();
+                }
+            }
+            catch (Exception ex)
+            { }
+            try
+            {
+                if (field[x + 1, y].Text == "")
+                {
+                    arrowRight.Location = new Point((x + 1) * size + range, y * size + range);
+                    arrowRight.Visible = true;
+                    arrowRight.BringToFront();
+                }
+            }
+            catch (Exception ex)
+            { }
+            try
+            {
+                if (field[x, y - 1].Text == "")
+                {
+                    arrowUp.Location = new Point(x * size + range, (y - 1) * size + range);
+                    arrowUp.Visible = true;
+                    arrowUp.BringToFront();
+                }
+            }
+            catch (Exception ex)
+            { }
+            try
+            {
+                if (field[x, y + 1].Text == "")
+                {
+                    arrowDown.Location = new Point(x * size + range, (y + 1) * size + range);
+                    arrowDown.Visible = true;
+                    arrowDown.BringToFront();
                 }
             }
             catch (Exception ex)
