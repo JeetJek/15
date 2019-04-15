@@ -81,33 +81,96 @@ namespace Пятнашки
         }
         private void clickDown(object sender, EventArgs e)
         {
-            arrowDown.Visible = false;
-            arrowUp.Visible = false;
-            arrowLeft.Visible = false;
-            arrowRight.Visible = false;
+            Button tmp = sender as Button;
+            int x = (tmp.Location.X - range) / size;
+            int y = (tmp.Location.Y - range) / size;
+            hideArrows();
+            try
+            {
+                Button temp = new Button();
+                temp.Text = field[x, y - 1].Text;
+                temp.Image = field[x, y - 1].Image;
+                field[x, y - 1].Text = field[x, y].Text;
+                field[x, y - 1].Image = field[x, y].Image;
+                field[x, y].Text = temp.Text;
+                field[x, y].Image = temp.Image;
+                hideArrows();
+                temp.Dispose();
+            }
+            catch (Exception ex)
+            { }
         }
         private void clickUp(object sender, EventArgs e)
         {
-            arrowDown.Visible = false;
-            arrowUp.Visible = false;
-            arrowLeft.Visible = false;
-            arrowRight.Visible = false;
+            Button tmp = sender as Button;
+            int x = (tmp.Location.X - range) / size;
+            int y = (tmp.Location.Y - range) / size;
+            
+            try
+            {
+                Button temp = new Button();
+                temp.Text= field[x, y + 1].Text;
+                temp.Image = field[x, y + 1].Image;
+                field[x, y + 1].Text = field[x, y].Text;
+                field[x, y + 1].Image = field[x, y].Image;
+                field[x, y].Text = temp.Text;
+                field[x, y].Image = temp.Image;
+                hideArrows();
+                temp.Dispose();
+            }
+            catch (Exception ex)
+            { }
         }
         private void clickLeft(object sender, EventArgs e)
         {
-            arrowDown.Visible = false;
-            arrowUp.Visible = false;
-            arrowLeft.Visible = false;
-            arrowRight.Visible = false;
+            Button tmp = sender as Button;
+            int x = (tmp.Location.X - range) / size;
+            int y = (tmp.Location.Y - range) / size;
+
+            try
+            {
+                Button temp = new Button();
+                temp.Text = field[x+1, y].Text;
+                temp.Image = field[x+1, y].Image;
+                field[x+1, y].Text = field[x, y].Text;
+                field[x+1, y].Image = field[x, y].Image;
+                field[x, y].Text = temp.Text;
+                field[x, y].Image = temp.Image;
+                hideArrows();
+                temp.Dispose();
+            }
+            catch (Exception ex)
+            { }
         }
         private void clickRight(object sender, EventArgs e)
+        {
+            Button tmp = sender as Button;
+            int x = (tmp.Location.X - range) / size;
+            int y = (tmp.Location.Y - range) / size;
+
+            try
+            {
+                Button temp = new Button();
+                temp.Text = field[x - 1, y].Text;
+                temp.Image = field[x - 1, y].Image;
+                field[x - 1, y].Text = field[x, y].Text;
+                field[x - 1, y].Image = field[x, y].Image;
+                field[x, y].Text = temp.Text;
+                field[x, y].Image = temp.Image;
+                hideArrows();
+                temp.Dispose();
+            }
+            catch (Exception ex)
+            { }
+        }
+
+        private void hideArrows()
         {
             arrowDown.Visible = false;
             arrowUp.Visible = false;
             arrowLeft.Visible = false;
             arrowRight.Visible = false;
         }
-
 
 
         private void clickButton(object sender, EventArgs e)
