@@ -17,13 +17,21 @@ namespace Пятнашки
             InitializeComponent();
         }
         Button[,] field;//Объявление локального массива типа кнопка для поля 
-        int[] nums;//массив чисел для облегчения проверки на валидность
+        int[] mas;//массив чисел для облегчения проверки на валидность
         int range = 5;//промежутки между клетками
         int size = 100;//размер клеток
         Button arrowUp = new Button();
         Button arrowDown = new Button();
         Button arrowLeft = new Button();
         Button arrowRight = new Button();
+
+        static void Swap<T>(ref T lhs, ref T rhs)
+        {
+            T temp;
+            temp = lhs;
+            lhs = rhs;
+            rhs = temp;
+        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -52,7 +60,7 @@ namespace Пятнашки
             this.Focus();
             int n =0;
             field = new Button[4, 4];
-            nums = new int[4*4];
+            mas = new int[4*4];
             this.Location= new Point(System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width / 2-(System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width / 4), System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height / 2 - (System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height / 4));
             for(int j=0;j<4;j++)
                 for(int i=0;i<4;i++)
@@ -62,7 +70,7 @@ namespace Пятнашки
                     field[i,j].FlatAppearance.BorderSize = 0;
                     field[i, j].FlatStyle = FlatStyle.Flat;
                     field[i, j].Click += clickButton;//Добавляю обработку нажатия на кнопку
-                    field[i, j].Font = new Font("Arial", 30);//изменяю размер 
+                    field[i, j].Font = new Font("Arial", 20);//изменяю размер 
                     
                     Controls.Add(field[i, j]);//добавление кнопки на форму
                     field[i, j].Location = new Point(i * size + range, j * size + range);//задаю положение кнопки
@@ -70,32 +78,71 @@ namespace Пятнашки
                     field[i, j].Size = new Size(size, size);//размер ячейки
 
                     if (n != 15)
-                        field[i, j].Image = ScaleImage(Image.FromFile("Resourses/Cells.png"), size - 10, size - 10);//изменение размера картинки
+                        field[i, j].Image = ScaleImage(Image.FromFile("Resourses/"+(n+1)+".png"), size - 1, size - 1);//изменение размера картинки
                     if (n == 15)
                         field[i, j].Text = "";
                     if(n!=15)
-                        field[i, j].Text =""+ (n+1);//отображение цифер на кнопках
-                    nums[n] = n+1;//массив цифер
+                        field[i, j].Text =" ";//отображение цифер на кнопках
+                    mas[n] = n+1;//массив цифер
                     n++;
                 }
+            this.Show();
+            do
+            {
+                List<int> a = new List<int>();
+                for (int i = 0; i < 16; i++)
+                {
+                    if (i != 15)
+                        a.Add(i + 1);
+                    else
+                        a.Add(0);
+                }
+                Random rand = new Random();
+                int k;
+                k = 0;
+                for (int i = 0; i < 16; i++)
+                {
+                    int rng = rand.Next(a.Count());
+                    mas[i] = a[rng];
+                    if (a[rng] != 0)
+                    {
+                        field[i % 4, k].Text = " ";
+                        field[i % 4, k].Image = ScaleImage(Image.FromFile("Resourses/" + (a[rng]) + ".png"), size - 1, size - 1);
+                    }
+                    else
+                    {
+                        field[i % 4, k].Text = "";
+                        field[i % 4, k].Image = ScaleImage(Image.FromFile("Resourses/" + (0) + ".png"), size - 1, size - 1);
+                    }
+                    if ((i + 1) % 4 == 0)
+                        k++;
+                    a.Remove(a[rng]);
+                }
+            } while (check(mas) != true);
+
             this.Size = new Size((4 * size) + 5*range, (4 * size) + 10*range);
         }
+
         private void clickDown(object sender, EventArgs e)
         {
             Button tmp = sender as Button;
             int x = (tmp.Location.X - range) / size;
             int y = (tmp.Location.Y - range) / size;
-            hideArrows();
+            HideArrows();
             try
             {
+                
                 Button temp = new Button();
+                
                 temp.Text = field[x, y - 1].Text;
                 temp.Image = field[x, y - 1].Image;
                 field[x, y - 1].Text = field[x, y].Text;
                 field[x, y - 1].Image = field[x, y].Image;
                 field[x, y].Text = temp.Text;
                 field[x, y].Image = temp.Image;
-                hideArrows();
+               
+                Swap<int>(ref mas[4 * y + x], ref mas[4 * (y - 1) + x]);
+                HideArrows();
                 temp.Dispose();
             }
             catch (Exception ex)
@@ -116,7 +163,7 @@ namespace Пятнашки
                 field[x, y + 1].Image = field[x, y].Image;
                 field[x, y].Text = temp.Text;
                 field[x, y].Image = temp.Image;
-                hideArrows();
+                HideArrows();
                 temp.Dispose();
             }
             catch (Exception ex)
@@ -137,7 +184,7 @@ namespace Пятнашки
                 field[x+1, y].Image = field[x, y].Image;
                 field[x, y].Text = temp.Text;
                 field[x, y].Image = temp.Image;
-                hideArrows();
+                HideArrows();
                 temp.Dispose();
             }
             catch (Exception ex)
@@ -158,18 +205,11 @@ namespace Пятнашки
                 field[x - 1, y].Image = field[x, y].Image;
                 field[x, y].Text = temp.Text;
                 field[x, y].Image = temp.Image;
-                hideArrows();
+                HideArrows();
                 temp.Dispose();
             }
             catch (Exception ex)
             { }
-        }
-        private void hideArrows()
-        {
-            arrowDown.Visible = false;
-            arrowUp.Visible = false;
-            arrowLeft.Visible = false;
-            arrowRight.Visible = false;
         }
         private void clickButton(object sender, EventArgs e)
         {
@@ -221,9 +261,57 @@ namespace Пятнашки
             }
             catch (Exception ex)
             { }
-
         }
-        
+        private void HideArrows()
+        {
+            arrowDown.Visible = false;
+            arrowUp.Visible = false;
+            arrowLeft.Visible = false;
+            arrowRight.Visible = false;
+            win();
+        }
+
+        private bool check(int[] mas)
+        {
+            int sum = 0;
+            int zero = -1;
+            int n = 0;
+            for (int i = 0; i < 14; i++)
+            {
+                n = 0;
+                for (int j = i + 1; j < 16; j++)
+                {
+                    if (mas[i] == 0)
+                    {
+                        zero = i;
+                        break;
+                    }
+                    else
+                    {
+                        if (mas[j] < mas[i])
+                        {
+                            n++;
+                        }
+                    }
+
+                }
+                sum += n;
+            }
+            sum += zero;
+            if (sum % 2 == 0)
+                return true;
+            else
+                return false;
+        }
+        private void win()
+        {
+            for(int i=0;i<16;i++)
+            {
+                if (mas[i] != i)
+                    return;
+            }
+            End end = new End();
+        }
         static Image ScaleImage(Image source, int width, int height)
         {
 

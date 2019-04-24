@@ -8,3 +8,4 @@ C:\Users\Jek\Dropbox\Programming\C#\Пятнашки\Пятнашки\obj\Debug\
 C:\Users\Jek\Dropbox\Programming\C#\Пятнашки\Пятнашки\obj\Debug\Пятнашки.csproj.CoreCompileInputs.cache
 C:\Users\Jek\Dropbox\Programming\C#\Пятнашки\Пятнашки\obj\Debug\Пятнашки.exe
 C:\Users\Jek\Dropbox\Programming\C#\Пятнашки\Пятнашки\obj\Debug\Пятнашки.pdb
+C:\Users\Jek\Dropbox\Programming\C#\Пятнашки\Пятнашки\obj\Debug\Пятнашки.End.resources
