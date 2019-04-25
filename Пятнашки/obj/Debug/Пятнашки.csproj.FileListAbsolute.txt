@@ -2,10 +2,11 @@ C:\Users\Jek\Dropbox\Programming\C#\Пятнашки\Пятнашки\bin\Debug\
 C:\Users\Jek\Dropbox\Programming\C#\Пятнашки\Пятнашки\bin\Debug\Пятнашки.exe
 C:\Users\Jek\Dropbox\Programming\C#\Пятнашки\Пятнашки\bin\Debug\Пятнашки.pdb
 C:\Users\Jek\Dropbox\Programming\C#\Пятнашки\Пятнашки\obj\Debug\Пятнашки.csprojAssemblyReference.cache
-C:\Users\Jek\Dropbox\Programming\C#\Пятнашки\Пятнашки\obj\Debug\Пятнашки.Form1.resources
 C:\Users\Jek\Dropbox\Programming\C#\Пятнашки\Пятнашки\obj\Debug\Пятнашки.Properties.Resources.resources
 C:\Users\Jek\Dropbox\Programming\C#\Пятнашки\Пятнашки\obj\Debug\Пятнашки.csproj.GenerateResource.cache
 C:\Users\Jek\Dropbox\Programming\C#\Пятнашки\Пятнашки\obj\Debug\Пятнашки.csproj.CoreCompileInputs.cache
 C:\Users\Jek\Dropbox\Programming\C#\Пятнашки\Пятнашки\obj\Debug\Пятнашки.exe
 C:\Users\Jek\Dropbox\Programming\C#\Пятнашки\Пятнашки\obj\Debug\Пятнашки.pdb
 C:\Users\Jek\Dropbox\Programming\C#\Пятнашки\Пятнашки\obj\Debug\Пятнашки.End.resources
+C:\Users\Jek\Dropbox\Programming\C#\Пятнашки\Пятнашки\obj\Debug\Пятнашки.Game.resources
+C:\Users\Jek\Dropbox\Programming\C#\Пятнашки\Пятнашки\obj\Debug\Пятнашки.Start.resources

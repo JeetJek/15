@@ -1,18 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Пятнашки
 {
-    public partial class Form1 : Form
+    public partial class Game : Form
     {
-        public Form1()
+        public Game()
         {
             InitializeComponent();
         }
@@ -311,6 +307,7 @@ namespace Пятнашки
                     return;
             }
             End end = new End();
+            end.Location = this.Location;
         }
         static Image ScaleImage(Image source, int width, int height)
         {
@@ -349,6 +346,11 @@ namespace Пятнашки
 
                 return dest;
             }
+        }
+
+        private void Game_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

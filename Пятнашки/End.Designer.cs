@@ -59,8 +59,9 @@
             this.ClientSize = new System.Drawing.Size(610, 184);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "End";
-            this.Text = "End";
+            this.Text = "Победа";
             this.Load += new System.EventHandler(this.End_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
