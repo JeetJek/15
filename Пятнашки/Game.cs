@@ -20,7 +20,7 @@ namespace Пятнашки
         Button arrowDown = new Button();
         Button arrowLeft = new Button();
         Button arrowRight = new Button();
-
+        int h = 0;
         static void Swap<T>(ref T lhs, ref T rhs)
         {
             T temp;
@@ -115,8 +115,18 @@ namespace Пятнашки
                     a.Remove(a[rng]);
                 }
             } while (check(mas) != true);
+            Label hod = new Label();
+            hod.Text = "Ходов: " + h;
+            hod.Location = new Point(4 * size + range, 0 * size + range);
+            
+            PictureBox mini = new PictureBox();
+            mini.Image = ScaleImage(Image.FromFile("Resourses/bg.jpg"), 300, 300);
+            mini.Location= new Point(5 * size, hod.Size.Height*2);
+            mini.Size = new Size(300, 300);
 
-            this.Size = new Size((4 * size) + 5*range, (4 * size) + 10*range);
+            Controls.Add(mini);
+            Controls.Add(hod);
+            this.Size = new Size((8 * size) + 5*range, (4 * size) + 10*range);
         }
 
         private void clickDown(object sender, EventArgs e)
